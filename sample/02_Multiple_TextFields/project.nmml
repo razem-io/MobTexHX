@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- NMML reference: https://gist.github.com/1763850 -->
+	
+	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
+	<meta title="MT_02_Sample" package="sample.textfield" version="0.0.1" company="MobTex" />
+	
+	<!-- output -->
+	<app main="textfield.Main" file="MT_02_Sample" path="bin" />
+	
+	<window background="#000000" fps="60"/>
+	<window width="1024" height="786" unless="mobile"/>
+    <window orientation="landscape" vsync="true" if="mobile" />
+
+	<source path="../../src/haxe" />
+	<source path="src" />
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+
+    <!-- <library path="lib/NyanCat.swf"/>  -->
+    <template path="../../src/java/MainActivity.java" rename="src/sample/textfield/MainActivity.java" if="android" />
+	
+</project>
