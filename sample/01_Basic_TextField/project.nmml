@@ -3,10 +3,10 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="MobTex Textfield Sample" package="sample.textfield" version="0.0.1" company="MobTex" />
+	<meta title="MT_01_Sample" package="sample.textfield" version="0.0.1" company="MobTex" />
 	
 	<!-- output -->
-	<app main="textfield.Main" file="Super ToyRun" path="bin" />
+	<app main="textfield.Main" file="MT_01_Sample" path="bin" />
 	
 	<window background="#000000" fps="60"/>
 	<window width="1024" height="786" unless="mobile"/>
