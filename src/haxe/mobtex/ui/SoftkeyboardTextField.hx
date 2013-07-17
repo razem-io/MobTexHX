@@ -1,4 +1,5 @@
 package mobtex.ui;
+import mobtex.config.MobTexConfig;
 import flash.events.KeyboardEvent;
 import motion.easing.Elastic;
 import motion.Actuate;
@@ -10,6 +11,18 @@ import flash.events.Event;
 import flash.text.TextField;
 
 class SoftkeyboardTextField extends TextField{
+    var _configuration:MobTexConfig;
+    public var configuration(get, set):MobTexConfig;
+
+    function set_configuration(value:MobTexConfig):MobTexConfig {
+        _configuration = value;
+        return value;
+    }
+
+    function get_configuration():MobTexConfig {
+        return _configuration == null ? MobTexConfig.getGlobal() : _configuration;
+    }
+
     var isStageMoved:Bool = false;
 
     public function new() {
@@ -32,8 +45,6 @@ class SoftkeyboardTextField extends TextField{
         }else{
             init(null);
         }
-
-        //DisplayHandler.getInstance().getTouchSprite().addEventListener(KeyboardEvent.KEY_UP, onKeyPressed);
     }
 
     function init(e:Event){
@@ -42,13 +53,13 @@ class SoftkeyboardTextField extends TextField{
 
     function onFocusIn(e:FocusEvent){
         trace("Text IN");
-        Actuate.tween(Lib.current, 0.5, {y : -y}).ease(Elastic.easeOut);
+        Actuate.tween(Lib.current, configuration.getGlobalEaseDurationIN(), {y : -y}).ease(configuration.getGlobalEaseIN());
         isStageMoved = true;
     }
 
     function onFocusOut(e:FocusEvent){
         trace("Text OUT");
-        Actuate.tween(Lib.current, 0.5, {y : 0}).ease(Elastic.easeOut);
+        Actuate.tween(Lib.current, configuration.getGlobalEaseDurationIN(), {y : 0}).ease(configuration.getGlobalEaseOUT());
         isStageMoved = false;
     }
 
