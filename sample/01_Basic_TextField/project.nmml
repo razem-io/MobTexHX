@@ -15,9 +15,6 @@
 	<source path="src" />
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
-
-    <!-- <library path="lib/NyanCat.swf"/>  -->
-    <!--java path="../../src/java"/-->
-    <include path="../../src" />
+    <haxelib name="MobTexHX" />
 	
 </project>

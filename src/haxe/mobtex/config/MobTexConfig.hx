@@ -1,9 +1,7 @@
 package mobtex.config;
 import motion.easing.Expo;
-import motion.easing.Bounce;
-import motion.easing.Sine;
-import motion.easing.Linear;
 import motion.easing.IEasing;
+
 class MobTexConfig {
     static var globalConfig:MobTexConfig;
 
@@ -12,6 +10,9 @@ class MobTexConfig {
 
     var globalEaseDurationIN:Float = 0.4;
     var globalEaseDurationOUT:Float = 0.4;
+
+    var globalPositionOffsetY:Float = 100;
+    var globalPositionOffsetX:Float = 0;
 
 
     public function new(){
@@ -58,6 +59,22 @@ class MobTexConfig {
 	 */
     public function getGlobalEaseDurationOUT():Float {
         return globalEaseDurationOUT;
+    }
+
+    /**
+	 * Gets the y offset. If a positive offset is set the stage gets moved minus the offset.
+	 * @return offset y
+	 */
+    public function getGlobalPositionOffsetX():Float {
+        return globalPositionOffsetX;
+    }
+
+    /**
+	 * Gets the x offset. If a positive offset is set the stage gets moved minus the offset.
+	 * @return offset x
+	 */
+    public function getGlobalPositionOffsetY():Float {
+        return globalPositionOffsetY;
     }
 
     //////****** SETTERS ******//////
@@ -121,6 +138,26 @@ class MobTexConfig {
 	 */
     public function setGlobalEaseDurationOUT(easingDuration:Float):MobTexConfig {
         globalEaseDurationOUT = easingDuration;
+        return this;
+    }
+
+    /**
+	 * Sets the y offset. If a positive offset is set the stage gets moved minus the offset.
+	 * @param	positionOffsetY offset y
+	 * @return MobTexConfig
+	 */
+    public function setGlobalPositionOffsetY(positionOffsetY:Float):MobTexConfig {
+        globalPositionOffsetY = positionOffsetY;
+        return this;
+    }
+
+    /**
+	 * Sets the x offset. If a positive offset is set the stage gets moved minus the offset.
+	 * @param	positionOffsetX offset x
+	 * @return MobTexConfig
+	 */
+    public function setGlobalPositionOffsetX(positionOffsetX:Float):MobTexConfig {
+        globalPositionOffsetX = positionOffsetX;
         return this;
     }
 

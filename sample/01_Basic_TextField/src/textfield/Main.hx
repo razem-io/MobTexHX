@@ -1,9 +1,10 @@
 package textfield;
 
-import flash.display.*;
+import flash.display.StageScaleMode;
+import flash.display.StageAlign;
+import flash.display.StageQuality;
 import flash.Lib;
 import textfield.sample.TextFieldSample;
-import mobtex.listener.VirtualKeyboardStateListener;
 /**
  * ...
  * @author Julian Liebl

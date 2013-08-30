@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
     <!--ndll name="MobTex" /-->
-    <java path="mobtex/android" />
+    <classpath name="src/haxe" />
+    <java path="src/native/android" />
 </project>

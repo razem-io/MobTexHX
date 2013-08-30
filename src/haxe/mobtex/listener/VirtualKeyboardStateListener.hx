@@ -11,12 +11,11 @@ class VirtualKeyboardStateListener {
     //if virtual keyboard state changes -> sends a signal to all registered callbacks
     private function sendCallBack(state:Bool, diffScreen:Float){
         trace("Callback send at " + Date.now().getTime());
-        currentTimer = null;
         for(callback in callbacks){
             if(state){
-                callback.onKeyboardUp(0);
+                callback.onKeyboardUp(diffScreen);
             }else{
-                callback.onKeyboardDown(0);
+                callback.onKeyboardDown(diffScreen);
             }
         }
     }

@@ -45,4 +45,15 @@ public class ANVirtualKeyboardListener {
           });
           return 1;
       }
+
+      public static int getVisibleDisplayHeight(){
+          Rect r = new Rect();
+          View activityRootView = GameActivity.getInstance().getMainView();
+          activityRootView.getWindowVisibleDisplayFrame(r);
+
+          int screenHeight = activityRootView.getRootView().getHeight();
+          int heightDiff = screenHeight - (r.bottom - r.top);
+
+          return heightDiff;
+      }
 }
