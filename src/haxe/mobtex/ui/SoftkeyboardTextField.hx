@@ -15,7 +15,11 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
 
     var defaultStageYPos:Float = 0;
 
-    var isStageMoved:Bool = false;
+    var _isStageMoved:Bool;
+    public var isStageMoved(get, null):Bool = false;
+    function get_isStageMoved():Bool {
+        return _isStageMoved;
+    }
 
     //MobTexConfig for current SoftkeyboardTextField
     var _configuration:MobTexConfig;
@@ -129,12 +133,12 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
         trace("Moving stage up!");
         Actuate.tween(Lib.current, 0.5, {y : - localToGlobal(new Point(x, y)).y + height + configuration.getGlobalPositionOffsetY()}).ease(configuration.getGlobalEaseIN());
         //Actuate.tween(Lib.current, configuration.getGlobalEaseDurationIN(), {y : -y}).ease(configuration.getGlobalEaseIN());
-        isStageMoved = true;
+        _isStageMoved = true;
     }
 
     public function moveStageDown(){
         trace("Moving stage down!");
         Actuate.tween(Lib.current, configuration.getGlobalEaseDurationIN(), {y : defaultStageYPos}).ease(configuration.getGlobalEaseOUT());
-        isStageMoved = false;
+        _isStageMoved = false;
     }
 }
