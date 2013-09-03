@@ -16,7 +16,6 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
     var defaultStageYPos:Float = 0;
 
     var isStageMoved:Bool = false;
-    var isPolling:Bool = false;
 
     //MobTexConfig for current SoftkeyboardTextField
     var _configuration:MobTexConfig;
@@ -72,14 +71,13 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
     public function new(enabled:Bool = true) {
         super();
         this.enabled = enabled;
-        this.isPolling = false;
+        defaultStageYPos = Lib.current.y;
     }
 
     function onFocusIn(e:FocusEvent){
         trace("Text IN");
         //if it is on android we need to listen for layout changes instead of moving the stage
         #if android
-            defaultStageYPos = Lib.current.y;
             enableAndroidKeyboardStatePoll();
             //VirtualKeyboardStateListener.getInstance().addCallback(this);
         #else
@@ -96,6 +94,7 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
     }
 
     #if android
+    //Workaround for bug: https://haxenme.atlassian.net/browse/NME-252
     function enableAndroidKeyboardStatePoll(){
         if(jni_getVisibleDisplayHeight == null){
             jni_getVisibleDisplayHeight = JNI.createStaticMethod("mobtex/android/ANVirtualKeyboardListener", "getVisibleDisplayHeight", "()I");
@@ -109,10 +108,7 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
             return;
         }
         Actuate.timer(0.2).onComplete(function(){
-            isPolling = false;
-            if(stage.focus == this){
-                enableAndroidKeyboardStatePoll();
-            }
+            enableAndroidKeyboardStatePoll();
         });
     }
 
@@ -123,9 +119,7 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
 
     public function onKeyboardDown(remainingScreenY:Float):Void{
         trace("Softkeyboard: DOWN");
-
         //VirtualKeyboardStateListener.getInstance().removeCallback(this);
-
         moveStageDown();
         stage.focus = null;
     }
