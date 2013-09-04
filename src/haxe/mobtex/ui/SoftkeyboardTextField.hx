@@ -129,16 +129,20 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
     }
     #end
 
-    public function moveStageUp(){
+    function moveStageUp(){
         trace("Moving stage up!");
         Actuate.tween(Lib.current, 0.5, {y : - localToGlobal(new Point(x, y)).y + height + configuration.getGlobalPositionOffsetY()}).ease(configuration.getGlobalEaseIN());
         //Actuate.tween(Lib.current, configuration.getGlobalEaseDurationIN(), {y : -y}).ease(configuration.getGlobalEaseIN());
         _isStageMoved = true;
     }
 
-    public function moveStageDown(){
+    function moveStageDown(){
         trace("Moving stage down!");
         Actuate.tween(Lib.current, configuration.getGlobalEaseDurationIN(), {y : defaultStageYPos}).ease(configuration.getGlobalEaseOUT());
         _isStageMoved = false;
+    }
+
+    public function reset(){
+        Actuate.apply(Lib.current, {y : defaultStageYPos});
     }
 }
