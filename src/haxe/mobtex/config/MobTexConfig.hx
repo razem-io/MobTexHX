@@ -1,4 +1,6 @@
 package mobtex.config;
+import flash.display.DisplayObject;
+import flash.Lib;
 import motion.easing.Expo;
 import motion.easing.IEasing;
 
@@ -14,6 +16,10 @@ class MobTexConfig {
     var globalPositionOffsetY:Float = 100;
     var globalPositionOffsetX:Float = 0;
 
+    var globalScaleY:Float = 1;
+    var globalScaleX:Float = 1;
+
+    var globalDisplayObject:DisplayObject;
 
     public function new(){
 
@@ -63,7 +69,7 @@ class MobTexConfig {
 
     /**
 	 * Gets the y offset. If a positive offset is set the stage gets moved minus the offset.
-	 * @return offset y
+	 * @return offset x
 	 */
     public function getGlobalPositionOffsetX():Float {
         return globalPositionOffsetX;
@@ -71,10 +77,36 @@ class MobTexConfig {
 
     /**
 	 * Gets the x offset. If a positive offset is set the stage gets moved minus the offset.
-	 * @return offset x
+	 * @return offset y
 	 */
     public function getGlobalPositionOffsetY():Float {
         return globalPositionOffsetY;
+    }
+
+    /**
+	 * Gets the x scale which will be used for localToGlobal functions.
+	 * @return scale x
+	 */
+    public function getGlobalScaleX():Float {
+        return globalScaleX;
+    }
+
+    /**
+	 * Gets the y scale which will be used for localToGlobal functions.
+	 * @return scale y
+	 */
+    public function getGlobalScaleY():Float {
+        return globalScaleY;
+    }
+
+    /**
+	 * Sets the display object which will be moved when a text field gets focused.
+	 * @param	displayObject the display object
+	 * @return MobTexConfig
+	 */
+    public function getGlobalDisplayObject():DisplayObject {
+        if(globalDisplayObject == null) return Lib.current;
+        return globalDisplayObject;
     }
 
     //////****** SETTERS ******//////
@@ -158,6 +190,36 @@ class MobTexConfig {
 	 */
     public function setGlobalPositionOffsetX(positionOffsetX:Float):MobTexConfig {
         globalPositionOffsetX = positionOffsetX;
+        return this;
+    }
+
+    /**
+	 * Sets the y scale. It will used for localToGlobal functions.
+	 * @param	scaleYValue scale y
+	 * @return MobTexConfig
+	 */
+    public function setGlobalScaleY(scaleYValue:Float):MobTexConfig {
+        globalScaleY = scaleYValue;
+        return this;
+    }
+
+    /**
+	 * Sets the x scale. It will used for localToGlobal functions.
+	 * @param	scaleXValue scale x
+	 * @return MobTexConfig
+	 */
+    public function setGlobalScaleX(scaleXValue:Float):MobTexConfig {
+        globalScaleX = scaleXValue;
+        return this;
+    }
+
+    /**
+	 * Sets the display object which will be moved when a text field gets focused.
+	 * @param	displayObject the display object
+	 * @return MobTexConfig
+	 */
+    public function setGlobalDisplayObject(displayObject:DisplayObject):MobTexConfig {
+        globalDisplayObject = displayObject;
         return this;
     }
 

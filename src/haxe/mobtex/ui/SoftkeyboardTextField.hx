@@ -4,6 +4,7 @@ import mobtex.listener.VirtualKeyboardStateListener;
 import openfl.utils.JNI;
 #end
 import flash.geom.Point;
+import flash.geom.Point;
 import mobtex.config.MobTexConfig;
 import motion.Actuate;
 import flash.Lib;
@@ -75,7 +76,7 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
     public function new(enabled:Bool = true) {
         super();
         this.enabled = enabled;
-        defaultStageYPos = Lib.current.y;
+        defaultStageYPos = configuration.getGlobalDisplayObject().y;
     }
 
     function onFocusIn(e:FocusEvent){
@@ -130,19 +131,19 @@ class SoftkeyboardTextField extends TextField #if android implements OnVirtualKe
     #end
 
     function moveStageUp(){
-        trace("Moving stage up!");
-        Actuate.tween(Lib.current, 0.5, {y : - localToGlobal(new Point(x, y)).y + height + configuration.getGlobalPositionOffsetY()}).ease(configuration.getGlobalEaseIN());
+        trace("Moving stage up! Height " + textHeight + " offsetY " + configuration.getGlobalPositionOffsetY() + " scale " + configuration.getGlobalScaleY() + " point " + localToGlobal(new Point(0,0)).y + " local point " + y);
+        Actuate.tween(configuration.getGlobalDisplayObject(), 0.5, {y : - configuration.getGlobalPositionOffsetY() / configuration.getGlobalScaleY()}).ease(configuration.getGlobalEaseIN());
         //Actuate.tween(Lib.current, configuration.getGlobalEaseDurationIN(), {y : -y}).ease(configuration.getGlobalEaseIN());
         _isStageMoved = true;
     }
 
     function moveStageDown(){
         trace("Moving stage down!");
-        Actuate.tween(Lib.current, configuration.getGlobalEaseDurationIN(), {y : defaultStageYPos}).ease(configuration.getGlobalEaseOUT());
+        Actuate.tween(configuration.getGlobalDisplayObject(), configuration.getGlobalEaseDurationIN(), {y : defaultStageYPos}).ease(configuration.getGlobalEaseOUT());
         _isStageMoved = false;
     }
 
     public function reset(){
-        Actuate.apply(Lib.current, {y : defaultStageYPos});
+        Actuate.apply(configuration.getGlobalDisplayObject(), {y : defaultStageYPos});
     }
 }
